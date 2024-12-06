@@ -34,11 +34,12 @@ services:
     restart: always
 
   mqtt:
-    image: eclipse-mosquitto
+     build: ./mosquitto
+    container_name: mqtt
+    ports:
+      - "1883:1883"
     volumes:
-      - ./path/to/config:/mosquitto/config
-    entrypoint: /mosquitto/config/setup.sh
-    user: root  # อนุญาตให้ใช้งาน script ด้วยสิทธิ์ root
+      - ./mosquitto/mosquitto-config:/mosquitto/config
     restart: always
 
   grafana:
